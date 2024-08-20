@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\View\View;
+use App\Http\Requests\UserRequest;
 
 class UsersController extends Controller
 {
@@ -24,39 +25,60 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('users.form',[
+            'user' => new User(),
+            'page_meta' => [
+                'title' => 'Create User',
+                'method' => 'post',
+                'url' => '/users',
+                'submit_text' => 'Create',
+            ]
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        User::create($request->validated());
+        return redirect('/users');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', [
+            'user' => $user,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+
+    public function edit(User $user)
     {
-        //
+        return view('users.form', [
+            'user' => $user,
+            'page_meta' => [
+                'title' => 'Edit User' . $user->name,
+                'method' => 'put',
+                'url' => '/users/' . $user->id,
+                'submit_text' => 'Update',
+            ]
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+        return redirect('/users');
     }
 
     /**

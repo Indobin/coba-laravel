@@ -22,9 +22,7 @@
                     <x-table.th>Name</x-table.th>
                     <x-table.th>Email</x-table.th>
                     <x-table.th>Created At</x-table.th>
-                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                        <span class="sr-only">Edit</span>
-                    </th>
+                   
                 </x-table.thead>
                 <x-table.tbody>
                     @foreach ($users as $user)
@@ -33,9 +31,16 @@
                             <x-table.td>{{ $user->name }}</x-table.td>
                             <x-table.td>{{ $user->email }}</x-table.td>
                             <x-table.td>{{ $user->created_at }}</x-table.td>
-                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
-                            </td>
+                            <x-table.td>
+                                <div class="flex justify-end gap-x-2">
+                                    <a href="/users/{{ $user->id }}" class="hover-underline">
+                                        View
+                                    </a>
+                                    <a href="/users/{{ $user->id }}/edit" class="hover-underline">
+                                        Edit
+                                    </a>
+                                </div>
+                            </x-table.td>
                         </tr>
                     @endforeach
                 </x-table.tbody>
