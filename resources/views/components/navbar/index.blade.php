@@ -11,9 +11,10 @@
               <x-navbar.link href="/home">Home</x-navbar.link>
               <x-navbar.link href="/about">About</x-navbar.link>
               <x-navbar.link href="/contact">Contact</x-navbar.link>
-              <x-navbar.link href="/users">Users</x-navbar.link>
+              <x-navbar.link href="{{ route('users.index') }}">Users</x-navbar.link>
               <x-navbar.link href="/gallery">Gallery</x-navbar.link>
               <x-navbar.link href="/products">Products</x-navbar.link>
+              <x-navbar.link href="{{ route('login') }}">Login</x-navbar.link>
             </div>
           </div>
         </div>
@@ -43,8 +44,9 @@
         <x-navbar.dropdown-item href="/home">Home</x-navbar.dropdown-item>
         <x-navbar.dropdown-item href="/about">About</x-navbar.dropdown-item>
         <x-navbar.dropdown-item href="/contact">Contact</x-navbar.dropdown-item>
-        <x-navbar.dropdown-item href="/users">Users</x-navbar.dropdown-item>
+        <x-navbar.dropdown-item href="{{ route('users.index') }}">Users</x-navbar.dropdown-item>
         <x-navbar.dropdown-item href="/gallery">Gallery</x-navbar.dropdown-item>
+        <x-navbar.dropdown-item href="/products">Products</x-dropdown-item>
         <x-navbar.dropdown-item href="/products">Products</x-dropdown-item>
       </div>
     

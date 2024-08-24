@@ -27,7 +27,7 @@
                 <x-table.tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <x-table.td>{{ $user->id }}</x-table.td>
+                            <x-table.td>{{ $loop->iteration }}</x-table.td>
                             <x-table.td>{{ $user->name }}</x-table.td>
                             <x-table.td>{{ $user->email }}</x-table.td>
                             <x-table.td>{{ $user->created_at }}</x-table.td>

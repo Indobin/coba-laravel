@@ -30,7 +30,7 @@ class UsersController extends Controller
             'page_meta' => [
                 'title' => 'Create User',
                 'method' => 'post',
-                'url' => '/users',
+                'url' => route('users.store'),
                 'submit_text' => 'Create',
             ]
         ]);
@@ -42,7 +42,7 @@ class UsersController extends Controller
     public function store(UserRequest $request)
     {
         User::create($request->validated());
-        return redirect('/users');
+        return redirect(route('users.index'));
     }
 
     /**
@@ -66,7 +66,7 @@ class UsersController extends Controller
             'page_meta' => [
                 'title' => 'Edit User' . $user->name,
                 'method' => 'put',
-                'url' => '/users/' . $user->id,
+                'url' => route('users.update', $user->id),
                 'submit_text' => 'Update',
             ]
         ]);
@@ -78,14 +78,15 @@ class UsersController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $user->update($request->validated());
-        return redirect('/users');
+        return redirect(route('users.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect(route('users.index'));
     }
 }
