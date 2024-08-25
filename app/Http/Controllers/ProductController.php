@@ -24,9 +24,28 @@ class ProductController extends Controller
         ]);
     }
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:3913015688.
-    // public function store(Request $request)
-    // {
-    //     Product::create($request->validated());
-    //     return redirect(route('products.index'));
-    // }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'image'         => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'title'         => 'required|min:5',
+            'description'   => 'required|min:10',
+            'price'         => 'required|numeric',
+            'stock'         => 'required|numeric'
+        ]);
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:1022902440.
+        $image = $request->file('image');
+        $image_extention = $image->extension();
+        $image_name = date('YmdHis') . "." . $image_extention;
+        $image->move(public_path('ImageProduct'), $image_name);
+        // $image->storeAs('public/products',$image->hashName());
+        Product::create([
+            'image'         => $image_name,
+            'title'         => $request->title,
+            'description'   => $request->description,
+            'price'         => $request->price,
+            'stock'         => $request->stock
+        ]);
+        return redirect(route('products.index'));
+    }
 }

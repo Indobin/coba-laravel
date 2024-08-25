@@ -18,32 +18,38 @@
             <div class="mt-8 flow-root">
                 <x-table>
                     <x-table.thead>
-                        <x-table.th>#</x-table.th>
-                        <x-table.th>Name</x-table.th>
-                        <x-table.th>Email</x-table.th>
-                        <x-table.th>Created At</x-table.th>
+                        <x-table.th>Image</x-table.th>
+                        <x-table.th>Title</x-table.th>
+                        {{-- <x-table.th>Description</x-table.th> --}}
+                        <x-table.th>Price</x-table.th>
+                        <x-table.th>Stock</x-table.th>
                        
                     </x-table.thead>
-                    {{-- <x-table.tbody>
-                        @foreach ($users as $user)
+                    <tbody>
+                        @forelse ($products as $product)
                             <tr>
-                                <x-table.td>{{ $loop->iteration }}</x-table.td>
-                                <x-table.td>{{ $user->name }}</x-table.td>
-                                <x-table.td>{{ $user->email }}</x-table.td>
-                                <x-table.td>{{ $user->created_at }}</x-table.td>
-                                <x-table.td>
-                                    <div class="flex justify-end gap-x-2">
-                                        <a href="/users/{{ $user->id }}" class="hover-underline">
-                                            View
-                                        </a>
-                                        <a href="/users/{{ $user->id }}/edit" class="hover-underline">
-                                            Edit
-                                        </a>
-                                    </div>
-                                </x-table.td>
+                                <td class="text-center">
+                                    <img src="{{asset('ImageProduct/'.$product->image)}}" class="rounded" style="width: 150px">
+                                </td>
+                                <td>{{ $product->title }}</td>
+                                <td>{{ "Rp " . number_format($product->price,2,',','.') }}</td>
+                                <td>{{ $product->stock }}</td>
+                                <td class="text-center">
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-dark">SHOW</a>
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                    </form>
+                                </td>
                             </tr>
-                        @endforeach
-                    </x-table.tbody> --}}
+                        @empty
+                            <div class="alert alert-danger">
+                                Data Products belum Tersedia.
+                            </div>
+                        @endforelse
+                    </tbody>
                 </x-table>
                
             </div>

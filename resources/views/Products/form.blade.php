@@ -76,10 +76,14 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-md btn-primary me-3">SAVE</button>
+                             <button type="submit" class="btn btn-md btn-primary me-3">SAVE</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>
-
+                            {{-- <x-button type="submit" class="me-3">
+                                Save
+                            </x-button>
+                            <x-button type="reset" class="bg-warning">
+                                Reset
+                            </x-button> --}}
                         </form> 
                     </div>
                 </div>
